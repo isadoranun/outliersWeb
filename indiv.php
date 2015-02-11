@@ -223,7 +223,7 @@ while (!feof($file))
     #echo '<span class="id">'.$currentLine[1].'</span>';
     #Star Type
     if ($currentLine[4]!="")
-      echo '<div class="star-type">Possible type of star:'.$currentLine[4].'</div>';
+      echo '<div class="star-type">Possible type of star: '.$currentLine[4].'</div>';
     #Message
     if ($currentLine[2]!="")
       echo '<div class="message">'.$currentLine[2].'</div>';
