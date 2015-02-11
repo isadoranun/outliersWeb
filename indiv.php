@@ -1,4 +1,7 @@
 <!DOCTYPE html />
+<?php
+$cookie_name = "pavlos6";
+?>
 
 <html>
   <head>
@@ -173,25 +176,60 @@ $description = array("Light-curve red band average magnitude", "Difference betwe
 
 <?php
 
-// define variables and set to empty values
 
-$comment = "";
-
-
+#Store post in a file section
+#TODO Add the type of star and order the parameters
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-   if (empty($_POST["comment"])) {
-
-     $comment = "";
-
-   } else {
-
-     $comment = test_input($_POST["comment"]);
-
-   }
+  $myfile = fopen("testfile.txt", "a") or die("Unable to open file!");
+  #User
+  fwrite($myfile, $_COOKIE[$cookie_name]." said on");
+  fwrite($myfile,",");
+  #Outlier id
+  fwrite($myfile, $id);
+  fwrite($myfile,",");
+  #Comment
+  fwrite($myfile, $_POST['comment']);
+  fwrite($myfile,",");
+  #TimeStamp
+  $date_now=time();
+  fwrite($myfile, date("m-d-Y", $date_now));
+  fwrite($myfile," at ");
+  fwrite($myfile, date("H:i", $date_now));
+  fwrite($myfile,"\r\n");
 }
 
-
+#Posts section begin
+#TODO: If the id of the comment is different than the star don't print it
+#Let users to delete their own posts
+echo '<div class="post-section">';
+$file = fopen("testfile.txt", "r") or exit("Unable to open file!");
+//Output a line of the file until the end is reached
+while (!feof($file))
+{
+  $currentLine = fgets($file);
+  if ($currentLine==""||$currentLine=="\r\n")
+      continue;
+  #Post begin 
+  echo '<div class="post">';
+    $currentLine=explode(",",$currentLine);
+    #User
+    if ($currentLine[0]!="")
+      echo '<span class="user">'.$currentLine[0].'</span>';
+    #Timestamp
+    if ($currentLine[3]!="")
+    echo '<span class="timestamp">'.$currentLine[3].'</span>';
+    #id
+    #if ($currentLine[1]!="")
+    #echo '<span class="id">'.$currentLine[1].'</span>';
+    #Message
+    if ($currentLine[2]!="")
+    echo '<div class="message">'.$currentLine[2].'</div>';
+  #Post end
+  echo '</div>';
+}
+#Posts Section end
+echo "</div>";
+fclose($file);
 
 function test_input($data) {
 
@@ -214,7 +252,8 @@ function test_input($data) {
 
 
 
-Comment: <textarea name="comment" cols="30" rows="5"><?php echo $comment;?></textarea>
+Comment:
+<input type="textarea" name="comment" cols="30" rows="5"></input>
 
    <br><br>
 
@@ -241,19 +280,6 @@ Comment: <textarea name="comment" cols="30" rows="5"><?php echo $comment;?></tex
 </form>
 </div>
 
-
-<?php
-$myfile = fopen("testfile.txt", "a") or die("Unable to open file!");
-fwrite($myfile, "Pavlos Says");
-fwrite($myfile,",");
-fwrite($myfile, $id);
-fwrite($myfile,",");
-fwrite($myfile, $comment);
-fwrite($myfile,"\r\n");
-echo $comment;
-
-
-?>
 
    <br><br>
 

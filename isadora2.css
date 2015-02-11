@@ -698,3 +698,28 @@ border-radius: 999px;
       cursor: url("https://scontent-a-lga.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/10373974_10153013010848886_4399264835399311232_n.jpg?oh=4f1a920a3f45303c1fc61614173250bf&oe=5549171B"), auto;
 
 }
+
+.post{
+border: 2px solid #e8e8e8;
+width: 90%;
+padding: 0.5em;
+margin-bottom: 1em;
+}
+.post .user{
+  display: inline-block;
+  color: #126baa;
+  font-size: 1.1em;
+  font-style: bold;
+}
+.post .timestamp{
+  display: inline-block;
+  font-size: 0.9em;
+  font-family: Georgia;
+  color: #888;
+  font-style: italic;
+  margin-left: 0.5em;
+}
+.post .message{
+  font-size: 1em;
+  margin: 0.3em;
+}
