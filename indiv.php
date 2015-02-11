@@ -176,9 +176,8 @@ $description = array("Light-curve red band average magnitude", "Difference betwe
 
 <?php
 
+// define variables and set to empty values
 
-#Store post in a file section
-#TODO Add the type of star and order the parameters
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $myfile = fopen("testfile.txt", "a") or die("Unable to open file!");
   #User
@@ -195,12 +194,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   fwrite($myfile, date("m-d-Y", $date_now));
   fwrite($myfile," at ");
   fwrite($myfile, date("H:i", $date_now));
+  fwrite($myfile,",");  
+  #Star Type
+  fwrite($myfile, $_POST['star_type']);  
   fwrite($myfile,"\r\n");
 }
 
 #Posts section begin
-#TODO: If the id of the comment is different than the star don't print it
-#Let users to delete their own posts
 echo '<div class="post-section">';
 $file = fopen("testfile.txt", "r") or exit("Unable to open file!");
 //Output a line of the file until the end is reached
@@ -217,13 +217,16 @@ while (!feof($file))
       echo '<span class="user">'.$currentLine[0].'</span>';
     #Timestamp
     if ($currentLine[3]!="")
-    echo '<span class="timestamp">'.$currentLine[3].'</span>';
+      echo '<span class="timestamp">'.$currentLine[3].'</span>';
     #id
     #if ($currentLine[1]!="")
     #echo '<span class="id">'.$currentLine[1].'</span>';
+    #Star Type
+    if ($currentLine[4]!="")
+      echo '<div class="star-type">Possible type of star:'.$currentLine[4].'</div>';
     #Message
     if ($currentLine[2]!="")
-    echo '<div class="message">'.$currentLine[2].'</div>';
+      echo '<div class="message">'.$currentLine[2].'</div>';
   #Post end
   echo '</div>';
 }
@@ -248,26 +251,24 @@ function test_input($data) {
 <br><br>
 
 <div class="module">
-<form method="post" action="indiv.php" > 
-
-
-
+<form method="post" action="indiv.php" >
 Comment:
-<input type="textarea" name="comment" cols="30" rows="5"></input>
+<textarea name="comment" cols="30" rows="5"></textarea>
 
    <br><br>
 
 <div class='styled-select'>
-   Type of star: <select> 
-
-  <option>Cepheid</option>
-  <option>RRL</option>
-  <option>Long Period Variable</option>
-  <option>BE</option>
-  <option>Eclipsing binary</option>
-  <option>Quasar</option>
-  <option>Nova</option>
-  <option>Coronae Borealis</option>
+   Type of star: 
+  <select name="star_type">
+    <option>Cepheid</option>
+    <option>RRL</option>
+    <option>Long Period Variable</option>
+    <option>BE</option>
+    <option>Eclipsing binary</option>
+    <option>Quasar</option>
+    <option>Nova</option>
+    <option>Coronae Borealis</option>
+  </select>
 </div>
 
   <br><br>
@@ -299,8 +300,3 @@ Comment:
 </div>
 
 </html>
-
-
-
-
-
