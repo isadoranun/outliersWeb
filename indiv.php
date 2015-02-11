@@ -218,6 +218,7 @@ Comment: <textarea name="comment" cols="30" rows="5"><?php echo $comment;?></tex
 
    <br><br>
 
+<div class='styled-select'>
    Type of star: <select> 
 
   <option>Cepheid</option>
@@ -228,6 +229,10 @@ Comment: <textarea name="comment" cols="30" rows="5"><?php echo $comment;?></tex
   <option>Quasar</option>
   <option>Nova</option>
   <option>Coronae Borealis</option>
+</div>
+
+  <br><br>
+  <br><br>
 
   <?php
    echo "<input  type='submit' name='$image' value='Submit' class='button'>";
