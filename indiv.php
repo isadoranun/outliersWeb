@@ -76,23 +76,17 @@ $numimg = $numimg + 1;
 
 
   <?php
-#$id = 'OUTL.pdf';
-#$id_folded = '8_1_4055_9.pdf';
-
 
 echo "<center><a href='$id' ><img src='$id' width='642'> </a></center>"; 
 #echo "<center><a href='$id_folded' ><img src='8_1_4055_9.pdf' bottom='0px' width='642'> </a></center>\n"; 
-
 
   ?>
 
 
 
-<div class="gallery">
 <div class="_isElement" id="_isElement_img">
 
 
-<div class="text hideOverflow">
 <div class="first column">
 <span class="title centerText">Outlier</span>
 <p>This outlier was obtained from the MACHO survey.</p></div>
@@ -259,7 +253,7 @@ echo $comment;
    <br><br>
 
 <right><div class="circleBase type6"><i>Logged as<br>
-Isadora<br>
+<?php echo $_COOKIE[$cookie_name]; ?><br>
 </div></right>
 
   </body>
