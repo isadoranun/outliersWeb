@@ -43,12 +43,6 @@ Isadora Nun & Pavlos Protopapas
 </div>
 </div>
 
-<div class="main">
-<div class="_isElement" id="_isElement_main">
-<div class="work">
-<div class="_isElement" id="_isElement_work">
-<div class="single">
-
 <?php
 
 
@@ -231,9 +225,7 @@ Comment: <textarea name="comment" cols="30" rows="5"><?php echo $comment;?></tex
   <option>Coronae Borealis</option>
 </div>
 
-  <br><br>
-  <br><br>
-
+  
   <?php
    echo "<input  type='submit' name='$image' value='Submit' class='button'>";
    ?> 
@@ -271,6 +263,10 @@ echo $comment;
 
 
 </div>
+</div>
+</div>
+</div>
+
 
 </html>
 
