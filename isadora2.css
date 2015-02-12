@@ -69,6 +69,7 @@ table tr th:last-child {
   border-right: 0;
 }
 
+
 .error {
   color: #C12267;
   font-family: "Aldine721BT-Light", Georgia, serif;
@@ -359,6 +360,7 @@ img {
   float: left;
   width: 310px;
   margin-right: 20px;
+  margin-top: -25px;
   font-size: 15px;
   font-family: "Aldine721BT-Light", Georgia, serif;
   font-weight: normal;
@@ -382,7 +384,7 @@ img {
   letter-spacing: .1em;
   display: block;
   width: 100%;
-  border-bottom: 3px solid #fffab9;
+  border-bottom: 3px solid #C12267;
   padding: 0 0 3px 0;
   margin: 20px 0 10px;
 }
@@ -546,11 +548,12 @@ h2 {
   bottom: 0;
   width: 100%;
   text-align: center;
+  margin-left: -120px
 }
 .bottom .back {
   display: inline-block;
   padding: 10px 15px;
-  background: #C12267;
+  background: #B6B6B4;
   color: black;
 }
 
@@ -690,8 +693,9 @@ border-radius: 999px;
   font-family: "Aldine721BT-Light", Georgia, serif;
   font-weight: normal;
   font-size: 12pt;
+  background: blue;
    
-   background: url(new_arrow.png) no-repeat right #fffab9;
+   background: url(new_arrow.png) no-repeat right #AAF2FF;
    }
 
    .custom {
@@ -722,4 +726,34 @@ margin-bottom: 1em;
 .post .message{
   font-size: 1em;
   margin: 0.3em;
+}
+
+.wrapper-dropdown {
+    /* Size and position */
+    position: relative; /* Enable absolute positioning for children and pseudo elements */
+    width: 200px;
+    padding: 10px;
+    margin: 0 auto;
+
+    /* Styles */
+    background: #9bc7de;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+
+    /* Font settings */
+    font-weight: bold;
+}
+
+.wrapper-dropdown:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    margin-top: -6px;
+    border-width: 6px 0 6px 6px;
+    border-style: solid;
+    border-color: transparent #fff;    
 }

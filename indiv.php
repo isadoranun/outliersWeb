@@ -10,10 +10,19 @@ $cookie_name = "pavlos6";
     <title>This is the title of my website</title>
      <LINK href="isadora2.css" rel="stylesheet" type="text/css">
       <link rel="stylesheet" href="webfonts.css" media="screen" />
-
+     
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="/is/js/release/kveik.1.4.24.js?1"></script>
 <script type="text/javascript" src="/is/contrib/jquery/plugins/jquery.color.min.js?1"></script>
+
+ <link href='http://fonts.googleapis.com/css?family=Unica+One' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="screen.css"  media="screen" title="no title" >
+
+
+<!-- custom modernizr build -->
+<script src="modernizr.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
   </head>
 
@@ -46,17 +55,15 @@ Isadora Nun & Pavlos Protopapas
 </div>
 </div>
 
+
 <?php
 
 
 $image =  $_GET["name"];
 
-
-
 $id = substr($image,'0', -4);
 
 $id = $id . '.pdf';
-
 
 
 $where1 = strpos($id, '_');
@@ -64,7 +71,6 @@ $where1 = strpos($id, '_');
 $numimg = substr($id, '0', $where1 );
 
 $numimg = $numimg + 1;
-
 
 
 #echo "<center><a href='$id' ><img src='$id' width='642'//> </a><br></center>\n"; 
@@ -123,8 +129,9 @@ if (($handle = fopen("MACHO_ts.csv", "r")) !== FALSE) {
 }
 
 
-
 ?>
+
+
 
 <table >
 
@@ -139,7 +146,7 @@ $description = array("Light-curve red band average magnitude", "Difference betwe
 
     foreach ($header as $val){
 
-        echo "<td bgcolor='#fffab9'>";
+        echo '<td bgcolor="#B6B6B4" align="center">';
         echo "<a href='$val' alt='$description[$ctr]' class='tooltip'>
                     $val </a>";
 
@@ -153,15 +160,16 @@ $description = array("Light-curve red band average magnitude", "Difference betwe
 
         for ($i = $ctr2; $i <= $ctr; ++$i){
 
-          echo "<th  bgcolor=white>";  
+          echo '<th  bgcolor="white" align="center">';  
           echo $features[$i];
-          echo "</th>";
+          echo '</th>';
 
           $ctr2 = $ctr2 + 1;  
         }
         echo "<tr>";
       }
     }
+
 ?>
 
 </table>  
@@ -173,12 +181,16 @@ $description = array("Light-curve red band average magnitude", "Difference betwe
 #Stores posts in a file
 #TODO:
 #-Order the parameters
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $myfile = fopen("testfile.txt", "a") or die("Unable to open file!");
+
+
   #User
   fwrite($myfile, $_COOKIE[$cookie_name]." said on");
   fwrite($myfile,",");
   #Outlier id
+
   fwrite($myfile, $id);
   fwrite($myfile,",");
   #Comment
@@ -205,11 +217,14 @@ $file = fopen("testfile.txt", "r") or exit("Unable to open file!");
 while (!feof($file))
 {
   $currentLine = fgets($file);
-  if ($currentLine==""||$currentLine=="\r\n")
+  if ($currentLine==""||$currentLine=="\r\n") 
       continue;
+  $currentLine=explode(",",$currentLine);
+  if ($currentLine[1]!=$id) 
+    continue;
   #Post begin 
   echo '<div class="post">';
-    $currentLine=explode(",",$currentLine);
+  
     #User
     if ($currentLine[0]!="")
       echo '<span class="user">'.$currentLine[0].'</span>';
@@ -246,14 +261,53 @@ function test_input($data) {
 
 ?>
 
+
+
 <br><br>
 
 <div class="module">
-<form method="post" action="indiv.php" >
+<?php
+echo '<form method="post" action="indiv.php?name='.$id.'">';
+?>
+
 Comment:
 <textarea name="comment" cols="30" rows="5"></textarea>
 
    <br><br>
+
+<!-- <fieldset class="radio-container">
+        <div class="radio-options">
+                <div class="toggle">Type of star</div>
+                <ul>
+                        <li>
+                                <input type="radio" name="my-beer" id="choice1" value="choice1">
+                                <label for="choice1">Cepheid</label>
+                        </li>
+                        <li>
+                                <input type="radio" name="my-beer" id="choice2" value="choice2">
+                                <label for="choice2">LPV</label>
+                        </li>
+                        <li>
+                                <input type="radio" name="my-beer" id="choice3" value="choice3">
+                                <label for="choice3">Be</label>
+                        </li>
+                        <li>
+                                <input type="radio" name="my-beer" id="choice4" value="choice4">
+                                <label for="choice4">Eclipsing Binary</label>
+                        </li>
+
+                        <li>
+                                <input type="radio" name="my-beer" id="choice4" value="choice4">
+                                <label for="choice4">RRL</label>
+                        </li>
+                        <li>
+                                <input type="radio" name="my-beer" id="choice4" value="choice4">
+                                <label for="choice4">Other</label>
+                        </li>
+                </ul>   
+        </div>
+</fieldset> -->
+
 
 <div class='styled-select'>
    Type of star: 
@@ -268,6 +322,7 @@ Comment:
     <option>Coronae Borealis</option>
   </select>
 </div>
+
 
   
   <?php
@@ -294,6 +349,11 @@ Comment:
 
 
 </div>
+
+<script src="https://apis.google.com/js/plusone.js">
+</script>
+
+
 
 
 </html>
