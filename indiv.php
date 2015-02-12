@@ -176,8 +176,9 @@ $description = array("Light-curve red band average magnitude", "Difference betwe
 
 <?php
 
-// define variables and set to empty values
-
+#Stores posts in a file
+#TODO:
+#-Order the parameters
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $myfile = fopen("testfile.txt", "a") or die("Unable to open file!");
   #User
@@ -201,6 +202,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 #Posts section begin
+#TODO
+#-If the id of the comment is different than the star don't print it
+#-Let users to delete their own posts
 echo '<div class="post-section">';
 $file = fopen("testfile.txt", "r") or exit("Unable to open file!");
 //Output a line of the file until the end is reached
