@@ -1,4 +1,7 @@
 <!DOCTYPE html />
+<?php
+$cookie_name = "pavlos6";
+?>
 
 <html>
   <head>
@@ -169,23 +172,61 @@ $description = array("Light-curve red band average magnitude", "Difference betwe
 
 // define variables and set to empty values
 
-$comment = "";
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-   if (empty($_POST["comment"])) {
-
-     $comment = "";
-
-   } else {
-
-     $comment = test_input($_POST["comment"]);
-
-   }
+  $myfile = fopen("testfile.txt", "a") or die("Unable to open file!");
+  #User
+  fwrite($myfile, $_COOKIE[$cookie_name]." said on");
+  fwrite($myfile,",");
+  #Outlier id
+  fwrite($myfile, $id);
+  fwrite($myfile,",");
+  #Comment
+  fwrite($myfile, $_POST['comment']);
+  fwrite($myfile,",");
+  #TimeStamp
+  $date_now=time();
+  fwrite($myfile, date("m-d-Y", $date_now));
+  fwrite($myfile," at ");
+  fwrite($myfile, date("H:i", $date_now));
+  fwrite($myfile,",");  
+  #Star Type
+  fwrite($myfile, $_POST['star_type']);  
+  fwrite($myfile,"\r\n");
 }
 
-
+#Posts section begin
+echo '<div class="post-section">';
+$file = fopen("testfile.txt", "r") or exit("Unable to open file!");
+//Output a line of the file until the end is reached
+while (!feof($file))
+{
+  $currentLine = fgets($file);
+  if ($currentLine==""||$currentLine=="\r\n")
+      continue;
+  #Post begin 
+  echo '<div class="post">';
+    $currentLine=explode(",",$currentLine);
+    #User
+    if ($currentLine[0]!="")
+      echo '<span class="user">'.$currentLine[0].'</span>';
+    #Timestamp
+    if ($currentLine[3]!="")
+      echo '<span class="timestamp">'.$currentLine[3].'</span>';
+    #id
+    #if ($currentLine[1]!="")
+    #echo '<span class="id">'.$currentLine[1].'</span>';
+    #Star Type
+    if ($currentLine[4]!="")
+      echo '<div class="star-type">Possible type of star:'.$currentLine[4].'</div>';
+    #Message
+    if ($currentLine[2]!="")
+      echo '<div class="message">'.$currentLine[2].'</div>';
+  #Post end
+  echo '</div>';
+}
+#Posts Section end
+echo "</div>";
+fclose($file);
 
 function test_input($data) {
 
@@ -204,25 +245,24 @@ function test_input($data) {
 <br><br>
 
 <div class="module">
-<form method="post" action="indiv.php" > 
-
-
-
-Comment: <textarea name="comment" cols="30" rows="5"><?php echo $comment;?></textarea>
+<form method="post" action="indiv.php" >
+Comment:
+<textarea name="comment" cols="30" rows="5"></textarea>
 
    <br><br>
 
 <div class='styled-select'>
-   Type of star: <select> 
-
-  <option>Cepheid</option>
-  <option>RRL</option>
-  <option>Long Period Variable</option>
-  <option>BE</option>
-  <option>Eclipsing binary</option>
-  <option>Quasar</option>
-  <option>Nova</option>
-  <option>Coronae Borealis</option>
+   Type of star: 
+  <select name="star_type">
+    <option>Cepheid</option>
+    <option>RRL</option>
+    <option>Long Period Variable</option>
+    <option>BE</option>
+    <option>Eclipsing binary</option>
+    <option>Quasar</option>
+    <option>Nova</option>
+    <option>Coronae Borealis</option>
+  </select>
 </div>
 
   
@@ -233,19 +273,6 @@ Comment: <textarea name="comment" cols="30" rows="5"><?php echo $comment;?></tex
 </form>
 </div>
 
-
-<?php
-$myfile = fopen("testfile.txt", "a") or die("Unable to open file!");
-fwrite($myfile, "Pavlos Says");
-fwrite($myfile,",");
-fwrite($myfile, $id);
-fwrite($myfile,",");
-fwrite($myfile, $comment);
-fwrite($myfile,"\r\n");
-echo $comment;
-
-
-?>
 
    <br><br>
 
@@ -269,8 +296,3 @@ echo $comment;
 
 
 </html>
-
-
-
-
-
