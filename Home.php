@@ -97,7 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if (!empty($_POST)) {
     if (filter_var($email, FILTER_VALIDATE_EMAIL) && (preg_match("/^[a-zA-Z ]*$/",$Name)) && (!isset($_COOKIE[$cookie_name]))){
       setcookie($cookie_name, $Name, time() + (86400 * 30), "/"); // 86400 = 1 day
-      echo 'hola';
       header('Location: Home.php');
     }
    }

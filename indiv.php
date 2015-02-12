@@ -275,38 +275,6 @@ Comment:
 
    <br><br>
 
-<!-- <fieldset class="radio-container">
-        <div class="radio-options">
-                <div class="toggle">Type of star</div>
-                <ul>
-                        <li>
-                                <input type="radio" name="my-beer" id="choice1" value="choice1">
-                                <label for="choice1">Cepheid</label>
-                        </li>
-                        <li>
-                                <input type="radio" name="my-beer" id="choice2" value="choice2">
-                                <label for="choice2">LPV</label>
-                        </li>
-                        <li>
-                                <input type="radio" name="my-beer" id="choice3" value="choice3">
-                                <label for="choice3">Be</label>
-                        </li>
-                        <li>
-                                <input type="radio" name="my-beer" id="choice4" value="choice4">
-                                <label for="choice4">Eclipsing Binary</label>
-                        </li>
-
-                        <li>
-                                <input type="radio" name="my-beer" id="choice4" value="choice4">
-                                <label for="choice4">RRL</label>
-                        </li>
-                        <li>
-                                <input type="radio" name="my-beer" id="choice4" value="choice4">
-                                <label for="choice4">Other</label>
-                        </li>
-                </ul>   
-        </div>
-</fieldset> -->
 
 
 <div class='styled-select'>
